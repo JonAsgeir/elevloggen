@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://biqmlnvpxu0em"]
+
+[ext_resource type="Script" uid="uid://cq7qtvtmi2and" path="res://scripts/student_page.gd" id="1_8dxnk"]
+
+[node name="StudentPage" type="Control" unique_id=1696616037]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8dxnk")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1284230307]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1743804478]
+layout_mode = 2
+
+[node name="StudentNameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=963584926]
+layout_mode = 2
+text = "Navn"
+
+[node name="SubjectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=78591455]
+layout_mode = 2
+text = "fag"
+
+[node name="BirthdateLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=975923115]
+layout_mode = 2
+text = "dato"
+
+[node name="GradeGoalLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=505689758]
+layout_mode = 2
+text = "Karaktermål: 0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=470244418]
+layout_mode = 2
+
+[node name="ContactLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=132054017]
+layout_mode = 2
+text = "Kontakt:"
+
+[node name="ContactMotherCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=661155754]
+layout_mode = 2
+text = "Mor"
+
+[node name="ContactFatherCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=806379010]
+layout_mode = 2
+text = "Far"

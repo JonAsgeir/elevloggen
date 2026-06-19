@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bhkh7qabebybw"]
+
+[ext_resource type="Script" uid="uid://dw4cut3a5i0sw" path="res://scripts/database_manager.gd" id="1_kdsms"]
+
+[node name="DatabaseManager" type="Node2D" unique_id=519507562]
+script = ExtResource("1_kdsms")
