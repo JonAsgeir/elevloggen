@@ -61,14 +61,27 @@ func create_tables() -> void:
 
 	db.query("""
 	CREATE TABLE IF NOT EXISTS interactions (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		student_id INTEGER NOT NULL,
-		subject_id INTEGER NOT NULL,
-		type TEXT NOT NULL,
-		comment TEXT NOT NULL,
-		date TEXT NOT NULL,
-		FOREIGN KEY (student_id) REFERENCES students(id),
-		FOREIGN KEY (subject_id) REFERENCES subjects(id)
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	student_id INTEGER NOT NULL,
+	subject_id INTEGER NOT NULL,
+	type TEXT NOT NULL, -- positive / negative
+	comment TEXT,
+	date TEXT NOT NULL,
+	FOREIGN KEY (student_id) REFERENCES students(id),
+	FOREIGN KEY (subject_id) REFERENCES subjects(id)
+	);
+	""")
+	
+	db.query("""
+	CREATE TABLE IF NOT EXISTS mastery_observations (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	student_id INTEGER NOT NULL,
+	subject_id INTEGER NOT NULL,
+	status TEXT NOT NULL, -- yes / unknown / no
+	comment TEXT,
+	date TEXT NOT NULL,
+	FOREIGN KEY (student_id) REFERENCES students(id),
+	FOREIGN KEY (subject_id) REFERENCES subjects(id)
 	);
 	""")
 	
