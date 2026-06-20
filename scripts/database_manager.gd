@@ -46,17 +46,24 @@ func create_tables() -> void:
 
 	db.query("""
 	CREATE TABLE IF NOT EXISTS goals (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		student_id INTEGER NOT NULL,
-		subject_id INTEGER NOT NULL,
-		goal_text TEXT NOT NULL,
-		status TEXT DEFAULT 'active',
-		created_date TEXT NOT NULL,
-		completed_date TEXT,
-		comment TEXT,
-		FOREIGN KEY (student_id) REFERENCES students(id),
-		FOREIGN KEY (subject_id) REFERENCES subjects(id)
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	student_id INTEGER NOT NULL,
+	subject_id INTEGER NOT NULL,
+	goal_text TEXT NOT NULL,
+	created_date TEXT NOT NULL,
+	completed_date TEXT,
+	completion_result TEXT, -- completed / not_completed
+	comment TEXT,
+	FOREIGN KEY (student_id) REFERENCES students(id),
+	FOREIGN KEY (subject_id) REFERENCES subjects(id)
 	);
+	""")
+	
+	db.query("""
+	CREATE UNIQUE INDEX IF NOT EXISTS one_active_goal_per_student_subject
+	ON goals(student_id, subject_id)
+	WHERE completed_date IS NULL
+	;)
 	""")
 
 	db.query("""
@@ -196,6 +203,43 @@ func update_parent_contact(student_id: int, contact_mother: bool, contact_father
 	    contact_father = %d
 	WHERE id = %d;
 	""" % [mother_value, father_value, student_id])
+
+func get_active_goal(student_id: int, subject_id: int) -> Dictionary:
+	db.query("""
+	SELECT *
+	FROM goals
+	WHERE student_id = %d
+	AND subject_id = %d
+	AND completed_date IS NULL;
+	""" % [student_id, subject_id])
+
+	if db.query_result.size() > 0:
+		return db.query_result[0]
+
+	return {}
+
+func save_active_goal(student_id: int, subject_id: int, goal_text: String, date: String) -> void:
+	goal_text = goal_text.strip_edges()
+
+	var active_goal: Dictionary = get_active_goal(student_id, subject_id)
+
+	if active_goal.is_empty():
+		if goal_text == "":
+			return
+
+		db.query("""
+		INSERT INTO goals
+		(student_id, subject_id, goal_text, created_date)
+		VALUES
+		(%d, %d, '%s', '%s');
+		""" % [student_id, subject_id, goal_text, date])
+	else:
+		db.query("""
+		UPDATE goals
+		SET goal_text = '%s'
+		WHERE id = %d;
+		""" % [goal_text, active_goal["id"]])
+
 
 func import_students_from_csv(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
