@@ -71,3 +71,14 @@ text = "test"
 [node name="GoalNotCompletedButton" type="Button" parent="MarginContainer/VBoxContainer/GoalContainer/VBoxContainer" unique_id=344678465]
 layout_mode = 2
 text = "test"
+
+[node name="NextStudentButtonCointainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1029820754]
+layout_mode = 2
+
+[node name="PreviousStudentButton" type="Button" parent="MarginContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=988945271]
+layout_mode = 2
+text = "Forrige"
+
+[node name="NextStudentButton" type="Button" parent="MarginContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=1572469956]
+layout_mode = 2
+text = "Neste"

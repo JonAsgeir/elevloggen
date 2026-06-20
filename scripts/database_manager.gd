@@ -62,8 +62,7 @@ func create_tables() -> void:
 	db.query("""
 	CREATE UNIQUE INDEX IF NOT EXISTS one_active_goal_per_student_subject
 	ON goals(student_id, subject_id)
-	WHERE completed_date IS NULL
-	;)
+	WHERE completed_date IS NULL;
 	""")
 
 	db.query("""
@@ -104,17 +103,24 @@ func add_student(
 	VALUES
 	('%s', '%s', '%s');
 	""" % [first_name, last_name, birthdate])
-
-func get_students() -> Array:
-	db.query("SELECT * FROM students ORDER BY last_name, first_name;")
-	return db.query_result
 	
-func add_subject(name: String) -> void:
+func get_student(student_id: int) -> Dictionary:
+	db.query("""
+	SELECT *
+	FROM students
+	WHERE id = %d;
+	""" % student_id)
+
+	if db.query_result.size() > 0:
+		return db.query_result[0]
+
+	return {}
+
+func add_subject(subject_name: String) -> void:
 	db.query("""
 	INSERT OR IGNORE INTO subjects (name)
 	VALUES ('%s');
-	""" % name)
-
+	""" % subject_name)
 
 func get_subjects() -> Array:
 	db.query("SELECT * FROM subjects ORDER BY name;")
@@ -127,7 +133,6 @@ func connect_student_to_subject(student_id: int, subject_id: int) -> void:
 	(student_id, subject_id)
 	VALUES (%d, %d);
 	""" % [student_id, subject_id])
-
 
 func get_students_in_subject(subject_id: int) -> Array:
 	db.query("""
