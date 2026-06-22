@@ -245,6 +245,25 @@ func save_active_goal(student_id: int, subject_id: int, goal_text: String, date:
 		WHERE id = %d;
 		""" % [goal_text, active_goal["id"]])
 
+func complete_active_goal(
+	student_id: int,
+	subject_id: int,
+	completion_result: String,
+	completed_date: String,
+	comment: String
+) -> void:
+	var active_goal: Dictionary = get_active_goal(student_id, subject_id)
+
+	if active_goal.is_empty():
+		return
+
+	db.query("""
+	UPDATE goals
+	SET completed_date = '%s',
+	    completion_result = '%s',
+	    comment = '%s'
+	WHERE id = %d;
+	""" % [completed_date, completion_result, comment, active_goal["id"]])
 
 func import_students_from_csv(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)

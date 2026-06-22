@@ -15,7 +15,11 @@ extends Control
 @onready var previous_student_button: Button = $MarginContainer/VBoxContainer/NextStudentButtonCointainer/PreviousStudentButton
 @onready var next_student_button: Button = $MarginContainer/VBoxContainer/NextStudentButtonCointainer/NextStudentButton
 
+@onready var goal_comment_dialog: AcceptDialog = $GoalCommentDialog
+@onready var goal_comment_text_edit: TextEdit = $GoalCommentDialog/GoalCommentContainer/GoalCommentTextEdit
+
 var current_student_id: int = -1
+var pending_goal_result: String = ""
 
 func _ready() -> void:
 	# SIGNALS
@@ -23,7 +27,9 @@ func _ready() -> void:
 	contact_father_checkbox.toggled.connect(_on_contact_changed)
 	previous_student_button.pressed.connect(_on_previous_student_button_pressed)
 	next_student_button.pressed.connect(_on_next_student_button_pressed)
-	
+	goal_completed_button.pressed.connect(_on_goal_completed_button_pressed)
+	goal_not_completed_button.pressed.connect(_on_goal_not_completed_button_pressed)
+	goal_comment_dialog.confirmed.connect(_on_goal_comment_confirmed)
 	show_current_student()
 
 
@@ -95,3 +101,27 @@ func _on_previous_student_button_pressed() -> void:
 		AppState.current_student_index -= 1
 
 	show_current_student()
+
+func _on_goal_completed_button_pressed() -> void:
+	pending_goal_result = "completed"
+	goal_comment_text_edit.text = ""
+	goal_comment_dialog.popup_centered()
+
+
+func _on_goal_not_completed_button_pressed() -> void:
+	pending_goal_result = "not_completed"
+	goal_comment_text_edit.text = ""
+	goal_comment_dialog.popup_centered()
+
+
+func _on_goal_comment_confirmed() -> void:
+	Database.complete_active_goal(
+		current_student_id,
+		AppState.selected_subject_id,
+		pending_goal_result,
+		Time.get_date_string_from_system(),
+		goal_comment_text_edit.text.strip_edges()
+	)
+
+	goal_text_edit.text = ""
+	pending_goal_result = ""

@@ -66,11 +66,12 @@ layout_mode = 2
 
 [node name="GoalCompletedButton" type="Button" parent="MarginContainer/VBoxContainer/GoalContainer/VBoxContainer" unique_id=393276562]
 layout_mode = 2
-text = "test"
+text = "Fullført
+"
 
 [node name="GoalNotCompletedButton" type="Button" parent="MarginContainer/VBoxContainer/GoalContainer/VBoxContainer" unique_id=344678465]
 layout_mode = 2
-text = "test"
+text = "Mislykket"
 
 [node name="NextStudentButtonCointainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1029820754]
 layout_mode = 2
@@ -82,3 +83,22 @@ text = "Forrige"
 [node name="NextStudentButton" type="Button" parent="MarginContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=1572469956]
 layout_mode = 2
 text = "Neste"
+
+[node name="GoalCommentDialog" type="AcceptDialog" parent="." unique_id=285950212]
+title = ""
+size = Vector2i(120, 134)
+ok_button_text = "Avslutt mål"
+
+[node name="GoalCommentContainer" type="VBoxContainer" parent="GoalCommentDialog" unique_id=271268881]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GoalCommentLabel" type="Label" parent="GoalCommentDialog/GoalCommentContainer" unique_id=1983218737]
+layout_mode = 2
+text = "Kommentar:"
+
+[node name="GoalCommentTextEdit" type="TextEdit" parent="GoalCommentDialog/GoalCommentContainer" unique_id=267702380]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+text = "Avslutt mål"
+wrap_mode = 1
