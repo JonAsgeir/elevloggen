@@ -13,8 +13,10 @@ script = ExtResource("1_8dxnk")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1284230307]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 596.0
+offset_bottom = 378.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1743804478]
 layout_mode = 2
@@ -73,8 +75,54 @@ text = "Fullført
 layout_mode = 2
 text = "Mislykket"
 
+[node name="MasteryLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1780811079]
+layout_mode = 2
+text = "Opplevd Mestring"
+
+[node name="MasteryContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=45722490]
+layout_mode = 2
+
+[node name="MasteryTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/MasteryContainer" unique_id=1952866213]
+custom_minimum_size = Vector2(500, 10)
+layout_mode = 2
+
+[node name="MasteryButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MasteryContainer" unique_id=1915217929]
+layout_mode = 2
+
+[node name="MasteryYesButton" type="Button" parent="MarginContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer" unique_id=718173938]
+layout_mode = 2
+text = "Ja"
+
+[node name="MasteryNoButton" type="Button" parent="MarginContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer" unique_id=407326581]
+layout_mode = 2
+text = "Nei"
+
+[node name="InteractionLabal" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1396749885]
+layout_mode = 2
+text = "Interaksjon"
+
+[node name="InteractionContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1346955652]
+layout_mode = 2
+
+[node name="InteractionTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/InteractionContainer" unique_id=1874781005]
+custom_minimum_size = Vector2(500, 10)
+layout_mode = 2
+
+[node name="InteractionButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InteractionContainer" unique_id=160897127]
+layout_mode = 2
+
+[node name="PositiveInteractionButton" type="Button" parent="MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer" unique_id=373812346]
+layout_mode = 2
+text = "Positiv"
+
+[node name="NegativeInteractionButton" type="Button" parent="MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer" unique_id=1119840116]
+layout_mode = 2
+text = "Negativ"
+
 [node name="NextStudentButtonCointainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1029820754]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 35)
 
 [node name="PreviousStudentButton" type="Button" parent="MarginContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=988945271]
 layout_mode = 2

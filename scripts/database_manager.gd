@@ -265,6 +265,34 @@ func complete_active_goal(
 	WHERE id = %d;
 	""" % [completed_date, completion_result, comment, active_goal["id"]])
 
+func add_mastery_observation(
+	student_id: int,
+	subject_id: int,
+	status: String,
+	comment: String,
+	date: String
+) -> void:
+	db.query("""
+	INSERT INTO mastery_observations
+	(student_id, subject_id, status, comment, date)
+	VALUES
+	(%d, %d, '%s', '%s', '%s');
+	""" % [student_id, subject_id, status, comment, date])
+
+func add_interaction(
+	student_id: int,
+	subject_id: int,
+	type: String,
+	comment: String,
+	date: String
+) -> void:
+	db.query("""
+	INSERT INTO interactions
+	(student_id, subject_id, type, comment, date)
+	VALUES
+	(%d, %d, '%s', '%s', '%s');
+	""" % [student_id, subject_id, type, comment, date])
+
 func import_students_from_csv(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
 

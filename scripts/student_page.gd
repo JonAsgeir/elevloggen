@@ -18,6 +18,14 @@ extends Control
 @onready var goal_comment_dialog: AcceptDialog = $GoalCommentDialog
 @onready var goal_comment_text_edit: TextEdit = $GoalCommentDialog/GoalCommentContainer/GoalCommentTextEdit
 
+@onready var mastery_text_edit: TextEdit = $MarginContainer/VBoxContainer/MasteryContainer/MasteryTextEdit
+@onready var mastery_yes_button: Button = $MarginContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer/MasteryYesButton
+@onready var mastery_no_button: Button = $MarginContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer/MasteryNoButton
+
+@onready var interaction_text_edit: TextEdit = $MarginContainer/VBoxContainer/InteractionContainer/InteractionTextEdit
+@onready var positive_interaction_button: Button = $MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/PositiveInteractionButton
+@onready var negative_interaction_button: Button = $MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/NegativeInteractionButton
+
 var current_student_id: int = -1
 var pending_goal_result: String = ""
 
@@ -30,6 +38,11 @@ func _ready() -> void:
 	goal_completed_button.pressed.connect(_on_goal_completed_button_pressed)
 	goal_not_completed_button.pressed.connect(_on_goal_not_completed_button_pressed)
 	goal_comment_dialog.confirmed.connect(_on_goal_comment_confirmed)
+	mastery_yes_button.pressed.connect(_on_mastery_yes_button_pressed)
+	mastery_no_button.pressed.connect(_on_mastery_no_button_pressed)
+	positive_interaction_button.pressed.connect(_on_positive_interaction_button_pressed)
+	negative_interaction_button.pressed.connect(_on_negative_interaction_button_pressed)
+	
 	show_current_student()
 
 
@@ -74,6 +87,33 @@ func save_current_goal() -> void:
 		Time.get_date_string_from_system()
 	)
 
+func save_mastery_observation(status: String) -> void:
+	if current_student_id == -1:
+		return
+
+	Database.add_mastery_observation(
+		current_student_id,
+		AppState.selected_subject_id,
+		status,
+		mastery_text_edit.text.strip_edges(),
+		Time.get_date_string_from_system()
+	)
+
+	mastery_text_edit.text = ""
+
+func save_interaction(type: String) -> void:
+	if current_student_id == -1:
+		return
+
+	Database.add_interaction(
+		current_student_id,
+		AppState.selected_subject_id,
+		type,
+		interaction_text_edit.text.strip_edges(),
+		Time.get_date_string_from_system()
+	)
+
+	interaction_text_edit.text = ""
 	
 func _on_contact_changed(_button_pressed: bool) -> void:
 	if current_student_id == -1:
@@ -125,3 +165,16 @@ func _on_goal_comment_confirmed() -> void:
 
 	goal_text_edit.text = ""
 	pending_goal_result = ""
+
+func _on_mastery_yes_button_pressed() -> void:
+	save_mastery_observation("mastery")
+
+func _on_mastery_no_button_pressed() -> void:
+	save_mastery_observation("no_mastery")
+
+func _on_positive_interaction_button_pressed() -> void:
+	save_interaction("positive")
+
+
+func _on_negative_interaction_button_pressed() -> void:
+	save_interaction("negative")
