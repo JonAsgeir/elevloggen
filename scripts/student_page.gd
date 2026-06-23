@@ -3,7 +3,11 @@ extends Control
 @onready var student_name_label: Label = $MarginContainer/VBoxContainer/StudentNameLabel
 @onready var subject_label: Label = $MarginContainer/VBoxContainer/SubjectLabel
 @onready var birthdate_label: Label = $MarginContainer/VBoxContainer/BirthdateLabel
-@onready var grade_goal_label: Label = $MarginContainer/VBoxContainer/GradeGoalLabel
+@onready var grade_goal_label: Label = $MarginContainer/VBoxContainer/GradeGoalContainer/GradeGoalLabel
+
+@onready var edit_grade_goal_button: Button = $MarginContainer/VBoxContainer/GradeGoalContainer/EditGradeGoalButton
+@onready var grade_goal_dialog: AcceptDialog = $GradeGoalDialog
+@onready var grade_goal_line_edit: LineEdit = $GradeGoalDialog/VBoxContainer/GradeGoalLineEdit
 
 @onready var contact_mother_checkbox: CheckBox = $MarginContainer/VBoxContainer/ContactContainer/ContactMotherCheckBox
 @onready var contact_father_checkbox: CheckBox = $MarginContainer/VBoxContainer/ContactContainer/ContactFatherCheckBox
@@ -42,6 +46,8 @@ func _ready() -> void:
 	mastery_no_button.pressed.connect(_on_mastery_no_button_pressed)
 	positive_interaction_button.pressed.connect(_on_positive_interaction_button_pressed)
 	negative_interaction_button.pressed.connect(_on_negative_interaction_button_pressed)
+	edit_grade_goal_button.pressed.connect(_on_edit_grade_goal_button_pressed)
+	grade_goal_dialog.confirmed.connect(_on_grade_goal_dialog_confirmed)
 	
 	show_current_student()
 
@@ -56,12 +62,15 @@ func show_current_student() -> void:
 	var student_summary = AppState.current_students[AppState.current_student_index]
 	current_student_id = student_summary["id"]
 
-	var student = Database.get_student(current_student_id)
+	var student = Database.get_student_in_subject(
+	current_student_id,
+	AppState.selected_subject_id
+	)
 
 	student_name_label.text = student["first_name"] + " " + student["last_name"]
 	subject_label.text = "Fag: " + AppState.selected_subject_name
 	birthdate_label.text = "Fødselsdato: " + student["birthdate"]
-	grade_goal_label.text = "Karaktermål: 0"
+	grade_goal_label.text = "Karaktermål: " + str(student["grade_goal"])
 
 	contact_mother_checkbox.button_pressed = student["contact_mother"] == 1
 	contact_father_checkbox.button_pressed = student["contact_father"] == 1
@@ -114,6 +123,22 @@ func save_interaction(type: String) -> void:
 	)
 
 	interaction_text_edit.text = ""
+
+func _on_edit_grade_goal_button_pressed() -> void:
+	grade_goal_line_edit.text = grade_goal_label.text.replace("Karaktermål: ", "")
+	grade_goal_dialog.popup_centered()
+
+
+func _on_grade_goal_dialog_confirmed() -> void:
+	var new_grade_goal := grade_goal_line_edit.text.strip_edges()
+
+	Database.update_grade_goal(
+		current_student_id,
+		AppState.selected_subject_id,
+		new_grade_goal
+	)
+
+	grade_goal_label.text = "Karaktermål: " + new_grade_goal
 	
 func _on_contact_changed(_button_pressed: bool) -> void:
 	if current_student_id == -1:

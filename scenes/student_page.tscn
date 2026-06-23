@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://biqmlnvpxu0em"]
 
 [ext_resource type="Script" uid="uid://cq7qtvtmi2and" path="res://scripts/student_page.gd" id="1_8dxnk"]
+[ext_resource type="Texture2D" uid="uid://c6r7t8rn7l4fg" path="res://icon.svg" id="2_u6j7o"]
 
 [node name="StudentPage" type="Control" unique_id=1696616037]
 layout_mode = 3
@@ -33,9 +34,17 @@ text = "fag"
 layout_mode = 2
 text = "dato"
 
-[node name="GradeGoalLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=505689758]
+[node name="GradeGoalContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2085013066]
 layout_mode = 2
-text = "Karaktermål: 0"
+
+[node name="GradeGoalLabel" type="Label" parent="MarginContainer/VBoxContainer/GradeGoalContainer" unique_id=505689758]
+layout_mode = 2
+
+[node name="EditGradeGoalButton" type="Button" parent="MarginContainer/VBoxContainer/GradeGoalContainer" unique_id=1793712103]
+layout_mode = 2
+text = "rediger"
+icon = ExtResource("2_u6j7o")
+expand_icon = true
 
 [node name="ContactContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=470244418]
 layout_mode = 2
@@ -122,10 +131,10 @@ text = "Negativ"
 [node name="NextStudentButtonCointainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1029820754]
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 35)
 
 [node name="PreviousStudentButton" type="Button" parent="MarginContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=988945271]
 layout_mode = 2
+offset_transform_enabled = true
 text = "Forrige"
 
 [node name="NextStudentButton" type="Button" parent="MarginContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=1572469956]
@@ -150,3 +159,18 @@ custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 text = "Avslutt mål"
 wrap_mode = 1
+
+[node name="GradeGoalDialog" type="AcceptDialog" parent="." unique_id=630844934]
+title = ""
+ok_button_text = "ok"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GradeGoalDialog" unique_id=658823502]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GradeGoalDialogLabel" type="Label" parent="GradeGoalDialog/VBoxContainer" unique_id=1357185931]
+layout_mode = 2
+text = "Nytt karaktermål"
+
+[node name="GradeGoalLineEdit" type="LineEdit" parent="GradeGoalDialog/VBoxContainer" unique_id=2059789857]
+layout_mode = 2

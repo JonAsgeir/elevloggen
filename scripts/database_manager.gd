@@ -37,7 +37,7 @@ func create_tables() -> void:
 	CREATE TABLE IF NOT EXISTS student_subjects (
 	student_id INTEGER NOT NULL,
 	subject_id INTEGER NOT NULL,
-	grade_goal TEXT DEFAULT '0',
+	grade_goal TEXT DEFAULT 'ikke satt',
 	PRIMARY KEY (student_id, subject_id),
 	FOREIGN KEY (student_id) REFERENCES students(id),
 	FOREIGN KEY (subject_id) REFERENCES subjects(id)
@@ -110,6 +110,23 @@ func get_student(student_id: int) -> Dictionary:
 	FROM students
 	WHERE id = %d;
 	""" % student_id)
+
+	if db.query_result.size() > 0:
+		return db.query_result[0]
+
+	return {}
+	
+func get_student_in_subject(student_id: int, subject_id: int) -> Dictionary:
+	db.query("""
+	SELECT
+		students.*,
+		student_subjects.grade_goal
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	WHERE students.id = %d
+	AND student_subjects.subject_id = %d;
+	""" % [student_id, subject_id])
 
 	if db.query_result.size() > 0:
 		return db.query_result[0]
@@ -208,6 +225,14 @@ func update_parent_contact(student_id: int, contact_mother: bool, contact_father
 	    contact_father = %d
 	WHERE id = %d;
 	""" % [mother_value, father_value, student_id])
+
+func update_grade_goal(student_id: int, subject_id: int, grade_goal: String) -> void:
+	db.query("""
+	UPDATE student_subjects
+	SET grade_goal = '%s'
+	WHERE student_id = %d
+	AND subject_id = %d;
+	""" % [grade_goal, student_id, subject_id])
 
 func get_active_goal(student_id: int, subject_id: int) -> Dictionary:
 	db.query("""
