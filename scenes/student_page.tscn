@@ -128,9 +128,12 @@ text = "Positiv"
 layout_mode = 2
 text = "Negativ"
 
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1603535798]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="NextStudentButtonCointainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1029820754]
 layout_mode = 2
-offset_transform_enabled = true
 
 [node name="PreviousStudentButton" type="Button" parent="MarginContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=988945271]
 layout_mode = 2
