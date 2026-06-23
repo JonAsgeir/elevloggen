@@ -1,6 +1,6 @@
 extends Control
 
-@onready var vbox: VBoxContainer = $VBoxContainer
+@onready var vbox: VBoxContainer = $CenterContainer/VBoxContainer/SubjectButtons
 
 func _ready() -> void:
 	load_subject_buttons()

@@ -24,7 +24,7 @@ Database="*uid://dw4cut3a5i0sw"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [physics]
 
