@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bqh1wpc1b3g6s"]
+
+[ext_resource type="Script" uid="uid://irm1vv2rxcyo" path="res://scripts/statistics_page.gd" id="1_7uxdg"]
+
+[node name="StatisticsPage" type="Control" unique_id=1861017685]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7uxdg")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=707610909]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1083846870]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer" unique_id=1882476793]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeaderLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=259876988]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Statistikk"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="LowInteractionLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1642818399]
+layout_mode = 2

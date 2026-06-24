@@ -155,8 +155,9 @@ func _on_next_student_button_pressed() -> void:
 
 	if AppState.current_student_index < AppState.current_students.size() - 1:
 		AppState.current_student_index += 1
-
-	show_current_student()
+		show_current_student()
+	else:
+		get_tree().change_scene_to_file("res://scenes/statistics_page.tscn")
 
 
 func _on_previous_student_button_pressed() -> void:

@@ -318,6 +318,29 @@ func add_interaction(
 	(%d, %d, '%s', '%s', '%s');
 	""" % [student_id, subject_id, type, comment, date])
 
+func get_students_with_fewest_positive_interactions(subject_id: int, days: int = 30, limit_count: int = 3) -> Array:
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		COUNT(interactions.id) AS positive_count
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN interactions
+		ON students.id = interactions.student_id
+		AND interactions.subject_id = %d
+		AND interactions.type = 'positive'
+		AND interactions.date >= date('now', '-%d days')
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY positive_count ASC, students.last_name ASC, students.first_name ASC
+	LIMIT %d;
+	""" % [subject_id, days, subject_id, limit_count])
+
+	return db.query_result
+
 func import_students_from_csv(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
 
