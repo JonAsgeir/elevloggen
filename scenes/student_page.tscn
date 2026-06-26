@@ -32,6 +32,7 @@ layout_mode = 2
 
 [node name="StudentNameLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=963584926]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Navn"
 
 [node name="SubjectLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=78591455]

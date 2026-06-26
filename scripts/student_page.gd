@@ -78,7 +78,7 @@ func show_current_student() -> void:
 
 	student_name_label.text = student["first_name"] + " " + student["last_name"]
 	subject_label.text = "Fag: " + AppState.selected_subject_name
-	birthdate_label.text = "Fødselsdato: " + student["birthdate"]
+	birthdate_label.text = format_birthdate_with_age(student["birthdate"])
 	grade_goal_label.text = "Karaktermål: " + str(student["grade_goal"])
 
 	contact_mother_checkbox.button_pressed = student["contact_mother"] == 1
@@ -93,6 +93,28 @@ func show_current_student() -> void:
 		goal_text_edit.text = ""
 	else:
 		goal_text_edit.text = active_goal["goal_text"]
+
+func format_birthdate_with_age(birthdate: String) -> String:
+	if birthdate == "":
+		return "Fødselsdato: ukjent"
+
+	var parts := birthdate.split("-")
+	if parts.size() != 3:
+		return "Fødselsdato: " + birthdate
+
+	var year := int(parts[0])
+	var month := int(parts[1])
+	var day := int(parts[2])
+
+	var today := Time.get_date_dict_from_system()
+	var age: int = today["year"] - year
+
+	if today["month"] < month or (today["month"] == month and today["day"] < day):
+		age -= 1
+
+	var norwegian_date := "%02d.%02d.%04d" % [day, month, year]
+
+	return "Fødselsdato: %s (%d år)" % [norwegian_date, age]
 
 func save_current_goal() -> void:
 	if current_student_id == -1:
