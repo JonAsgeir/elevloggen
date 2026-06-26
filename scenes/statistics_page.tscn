@@ -18,20 +18,45 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1083846870]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1330220927]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer" unique_id=1882476793]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1083846870]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=1882476793]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HeaderLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=259876988]
+[node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=259876988]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistikk"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="LowInteractionLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1642818399]
+[node name="LowInteractionLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1642818399]
 layout_mode = 2
+
+[node name="NavigationButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1965524027]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationButtonsContainer" unique_id=1240000589]
+layout_mode = 2
+text = "Tilbake"
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationButtonsContainer" unique_id=987416424]
+layout_mode = 2
+text = "Hovedmeny"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationButtonsContainer" unique_id=2025273745]
+layout_mode = 2
+text = "Avslutt"
