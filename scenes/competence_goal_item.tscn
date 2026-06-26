@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c8ngicb5xhexg"]
+
+[ext_resource type="Script" uid="uid://c32x4ki76cmh0" path="res://scripts/comptetence_goal_item.gd" id="1_g63ef"]
+
+[node name="ComptetenceGoalItem" type="VBoxContainer" unique_id=1098878457]
+offset_right = 37.0
+offset_bottom = 35.0
+size_flags_horizontal = 0
+script = ExtResource("1_g63ef")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1021806008]
+layout_mode = 2
+
+[node name="AchievementOptionButton" type="OptionButton" parent="HBoxContainer" unique_id=853202781]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="HBoxContainer" unique_id=1894300862]
+layout_mode = 2
+
+[node name="ToggleCommentCheckButton" type="CheckButton" parent="HBoxContainer" unique_id=1985687521]
+layout_mode = 2
+
+[node name="CommentTextEdit" type="TextEdit" parent="." unique_id=131526009]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2

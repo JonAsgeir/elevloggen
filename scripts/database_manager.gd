@@ -10,6 +10,7 @@ func _ready() -> void:
 	create_tables()
 	print(ProjectSettings.globalize_path("user://"))
 	
+	import_competence_goals_from_json("res://import/competence_goals.json")
 	import_students_from_csv("res://import/testdata.csv")
 
 	
@@ -89,6 +90,32 @@ func create_tables() -> void:
 	date TEXT NOT NULL,
 	FOREIGN KEY (student_id) REFERENCES students(id),
 	FOREIGN KEY (subject_id) REFERENCES subjects(id)
+	);
+	""")
+	
+	db.query("""
+	CREATE TABLE IF NOT EXISTS competence_goals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    subject_id INTEGER NOT NULL,
+    description TEXT NOT NULL,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id)
+	UNIQUE(subject_id, description)
+	);
+	""")
+	
+	db.query("""
+	CREATE TABLE IF NOT EXISTS student_competence_assessments (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	student_id INTEGER NOT NULL,
+	subject_id INTEGER NOT NULL,
+	competence_goal_id INTEGER NOT NULL,
+	achievement_level TEXT NOT NULL DEFAULT 'not_assessed',
+	comment TEXT,
+	updated_date TEXT,
+	UNIQUE(student_id, subject_id, competence_goal_id),
+	FOREIGN KEY (student_id) REFERENCES students(id),
+	FOREIGN KEY (subject_id) REFERENCES subjects(id),
+	FOREIGN KEY (competence_goal_id) REFERENCES competence_goals(id)
 	);
 	""")
 	
@@ -365,6 +392,15 @@ func update_student_notes(student_id: int, notes: String) -> void:
 	WHERE id = %d;
 	""" % [notes, student_id])
 
+func get_competence_goals(subject_id: int) -> Array:
+	db.query("""
+	SELECT *
+	FROM competence_goals
+	WHERE subject_id = %d
+	ORDER BY id;
+	""" % subject_id)
+
+	return db.query_result
 
 func import_students_from_csv(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
@@ -394,3 +430,34 @@ func import_students_from_csv(path: String) -> void:
 		var subject_id := get_or_create_subject(subject_name)
 
 		connect_student_to_subject(student_id, subject_id)
+
+func add_competence_goal(subject_id: int, description: String) -> void:
+	db.query("""
+	INSERT OR IGNORE INTO competence_goals
+	(subject_id, description)
+	VALUES
+	(%d, '%s');
+	""" % [subject_id, description])
+		
+func import_competence_goals_from_json(path: String) -> void:
+	var file := FileAccess.open(path, FileAccess.READ)
+
+	if file == null:
+		print("Kunne ikke åpne JSON-fil: ", path)
+		return
+
+	var json_text := file.get_as_text()
+	var parsed = JSON.parse_string(json_text)
+
+	if parsed == null:
+		print("Kunne ikke lese JSON.")
+		return
+
+	for subject_data in parsed["subjects"]:
+		var subject_name: String = subject_data["name"]
+		var subject_id := get_or_create_subject(subject_name)
+
+		for goal_description in subject_data["goals"]:
+			add_competence_goal(subject_id, goal_description)
+
+	print("Importerte kompetansemål fra: ", path)

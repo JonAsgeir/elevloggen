@@ -1,0 +1,35 @@
+{
+	"subjects": [
+		{
+			"name": "Matematikk",
+			"goals": [
+				"Lese, hente ut og vurdere matematikk i tekster om situasjoner fra lokalmiljøet, gjøre beregninger knyttet til dette og presentere og argumentere for resultatene",
+				"Utforske hvordan ulike premisser vil kunne påvirke hvordan matematiske problemer fra samfunnsliv og arbeidsliv løses",
+				"Modellere situasjoner knyttet til temaer fra samfunnsliv og arbeidsliv, presentere og argumentere for resultatene og for når modellene er gyldige",
+				"Identifisere variable størrelser i ulike situasjoner og bruke dem til utforsking og generalisering",
+				"Tolke og bruke formler som gjelder samfunnsliv og arbeidsliv",
+				"Bruke prosent, prosentpoeng, promille og vekstfaktor i utregninger og presentere og begrunne løsninger",
+				"Utforske, beskrive og bruke begrepene proporsjonalitet og omvendt proporsjonalitet",
+				"Tolke og bruke sammensatte måleenheter i praktiske sammenhenger og velge egnet måleenhet",
+				"Tolke og bruke funksjoner i matematisk modellering og problemløsing",
+				"Planlegge, utføre og presentere selvstendig arbeid knyttet til modellering og funksjoner innenfor samfunnsfaglige temaer",
+				"Bruke digitale verktøy i utforsking og problemløsing knyttet til egenskaper ved funksjoner, og diskutere løsningene",
+				"Tolke og regne med rotuttrykk, potenser og tall på standardform"
+			]
+		},
+		{
+			"name": "Spansk",
+			"goals": [
+				"Lytte til og forstå enkel og tydelig tale om personlige og dagligdagse emner",
+				"Delta i enkle samtaler i dagligdagse situasjoner om aktiviteter og kjente emner",
+				"Muntlig fortelle om dagligliv og opplevelser og uttrykke meninger, også spontant",
+				"Lese og forstå tilpassede og enklere autentiske tekster om personlige og dagligdagse emner",
+				"Skrive enkle tekster om dagligliv og opplevelser som forteller, beskriver og informerer, med og uten hjelpemidler",
+				"Bruke enkle språklige strukturer, regler for uttale og rettskriving og språkets offisielle alfabet eller tegn for å kommunisere på en situasjonstilpasset måte",
+				"Bruke relevante lærings- og kommunikasjonsstrategier, digitale ressurser og erfaringer fra tidligere språklæring i læringsprosessen",
+				"Utforske og beskrive levemåter, tradisjoner og geografi i områder der språket snakkes, og se sammenhenger med egen bakgrunn",
+				"tforske og beskrive kunstneriske og kulturelle uttrykk fra områder der språket snakkes, og gi uttrykk for egne opplevelser"
+			]
+		}
+	]
+}
