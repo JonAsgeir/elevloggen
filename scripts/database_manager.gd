@@ -22,6 +22,7 @@ func create_tables() -> void:
     birthdate TEXT,
     contact_mother INTEGER DEFAULT 0,
     contact_father INTEGER DEFAULT 0,
+	notes TEXT,
     UNIQUE(first_name, last_name, birthdate)
 	);
 	""")
@@ -340,6 +341,30 @@ func get_students_with_fewest_positive_interactions(subject_id: int, days: int =
 	""" % [subject_id, days, subject_id, limit_count])
 
 	return db.query_result
+
+func get_student_notes(student_id: int) -> String:
+	db.query("""
+	SELECT notes
+	FROM students
+	WHERE id = %d;
+	""" % student_id)
+
+	if db.query_result.size() > 0:
+		var notes = db.query_result[0]["notes"]
+		if notes == null:
+			return ""
+		return notes
+
+	return ""
+
+
+func update_student_notes(student_id: int, notes: String) -> void:
+	db.query("""
+	UPDATE students
+	SET notes = '%s'
+	WHERE id = %d;
+	""" % [notes, student_id])
+
 
 func import_students_from_csv(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)

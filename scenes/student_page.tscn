@@ -161,9 +161,9 @@ text = "Informasjon"
 layout_mode = 2
 text = "Kompetansemål"
 
-[node name="PlaceholderButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=1441248434]
+[node name="NotesButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=1441248434]
 layout_mode = 2
-text = "Ikke i bruk"
+text = "Notater"
 
 [node name="GoalCommentDialog" type="AcceptDialog" parent="." unique_id=285950212]
 title = ""
@@ -198,3 +198,16 @@ text = "Nytt karaktermål"
 
 [node name="GradeGoalLineEdit" type="LineEdit" parent="GradeGoalDialog/VBoxContainer" unique_id=2059789857]
 layout_mode = 2
+
+[node name="NotesDialog" type="AcceptDialog" parent="." unique_id=1399927796]
+title = "Notatblokk"
+size = Vector2i(500, 400)
+ok_button_text = "Lukk"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NotesDialog" unique_id=1550663504]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotesTextEdit" type="TextEdit" parent="NotesDialog/VBoxContainer" unique_id=1032881251]
+layout_mode = 2
+size_flags_vertical = 3

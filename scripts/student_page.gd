@@ -30,6 +30,10 @@ extends Control
 @onready var positive_interaction_button: Button = $MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/PositiveInteractionButton
 @onready var negative_interaction_button: Button = $MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/NegativeInteractionButton
 
+@onready var notes_button: Button = $MarginContainer/RightButtonsContainer/NotesButton
+@onready var notes_dialog: AcceptDialog = $NotesDialog
+@onready var notes_text_edit: TextEdit = $NotesDialog/VBoxContainer/NotesTextEdit
+
 var current_student_id: int = -1
 var pending_goal_result: String = ""
 
@@ -48,6 +52,8 @@ func _ready() -> void:
 	negative_interaction_button.pressed.connect(_on_negative_interaction_button_pressed)
 	edit_grade_goal_button.pressed.connect(_on_edit_grade_goal_button_pressed)
 	grade_goal_dialog.confirmed.connect(_on_grade_goal_dialog_confirmed)
+	notes_button.pressed.connect(_on_notes_button_pressed)
+	notes_dialog.confirmed.connect(_on_notes_dialog_confirmed)
 	
 	show_current_student()
 
@@ -204,3 +210,20 @@ func _on_positive_interaction_button_pressed() -> void:
 
 func _on_negative_interaction_button_pressed() -> void:
 	save_interaction("negative")
+
+func _on_notes_button_pressed() -> void:
+	if current_student_id == -1:
+		return
+
+	notes_text_edit.text = Database.get_student_notes(current_student_id)
+	notes_dialog.popup_centered()
+
+
+func _on_notes_dialog_confirmed() -> void:
+	if current_student_id == -1:
+		return
+
+	Database.update_student_notes(
+		current_student_id,
+		notes_text_edit.text.strip_edges()
+	)
