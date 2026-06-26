@@ -402,6 +402,55 @@ func get_competence_goals(subject_id: int) -> Array:
 
 	return db.query_result
 
+func get_competence_assessment(student_id: int, subject_id: int, competence_goal_id: int) -> Dictionary:
+	db.query("""
+	SELECT *
+	FROM student_competence_assessments
+	WHERE student_id = %d
+	AND subject_id = %d
+	AND competence_goal_id = %d;
+	""" % [student_id, subject_id, competence_goal_id])
+
+	if db.query_result.size() > 0:
+		return db.query_result[0]
+
+	return {}
+
+func save_competence_assessment(
+	student_id: int,
+	subject_id: int,
+	competence_goal_id: int,
+	achievement_level: String,
+	comment: String,
+	updated_date: String
+) -> void:
+	db.query("""
+	INSERT INTO student_competence_assessments
+	(student_id, subject_id, competence_goal_id, achievement_level, comment, updated_date)
+	VALUES
+	(%d, %d, %d, '%s', '%s', '%s')
+	ON CONFLICT(student_id, subject_id, competence_goal_id)
+	DO UPDATE SET
+		achievement_level = excluded.achievement_level,
+		comment = excluded.comment,
+		updated_date = excluded.updated_date;
+	""" % [
+		student_id,
+		subject_id,
+		competence_goal_id,
+		achievement_level,
+		comment,
+		updated_date
+	])
+
+func add_competence_goal(subject_id: int, description: String) -> void:
+	db.query("""
+	INSERT OR IGNORE INTO competence_goals
+	(subject_id, description)
+	VALUES
+	(%d, '%s');
+	""" % [subject_id, description])
+
 func import_students_from_csv(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
 
@@ -430,14 +479,6 @@ func import_students_from_csv(path: String) -> void:
 		var subject_id := get_or_create_subject(subject_name)
 
 		connect_student_to_subject(student_id, subject_id)
-
-func add_competence_goal(subject_id: int, description: String) -> void:
-	db.query("""
-	INSERT OR IGNORE INTO competence_goals
-	(subject_id, description)
-	VALUES
-	(%d, '%s');
-	""" % [subject_id, description])
 		
 func import_competence_goals_from_json(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)

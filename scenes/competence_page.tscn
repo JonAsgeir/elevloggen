@@ -38,3 +38,12 @@ uppercase = true
 
 [node name="CompetenceGoalsComtainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=2130481165]
 layout_mode = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1013788428]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=671309508]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Lukk"

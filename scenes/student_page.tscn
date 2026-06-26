@@ -157,7 +157,7 @@ size_flags_horizontal = 8
 layout_mode = 2
 text = "Informasjon"
 
-[node name="KompetanseButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=148429399]
+[node name="CompetenceButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=148429399]
 layout_mode = 2
 text = "Kompetansemål"
 
