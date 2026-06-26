@@ -1,34 +1,34 @@
 extends Control
 
-@onready var student_name_label: Label = $MarginContainer/VBoxContainer/StudentNameLabel
-@onready var subject_label: Label = $MarginContainer/VBoxContainer/SubjectLabel
-@onready var birthdate_label: Label = $MarginContainer/VBoxContainer/BirthdateLabel
-@onready var grade_goal_label: Label = $MarginContainer/VBoxContainer/GradeGoalContainer/GradeGoalLabel
+@onready var student_name_label: Label = $MarginContainer/ScrollContainer/VBoxContainer/StudentNameLabel
+@onready var subject_label: Label = $MarginContainer/ScrollContainer/VBoxContainer/SubjectLabel
+@onready var birthdate_label: Label = $MarginContainer/ScrollContainer/VBoxContainer/BirthdateLabel
+@onready var grade_goal_label: Label = $MarginContainer/ScrollContainer/VBoxContainer/GradeGoalContainer/GradeGoalLabel
 
-@onready var edit_grade_goal_button: Button = $MarginContainer/VBoxContainer/GradeGoalContainer/EditGradeGoalButton
+@onready var edit_grade_goal_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/GradeGoalContainer/EditGradeGoalButton
 @onready var grade_goal_dialog: AcceptDialog = $GradeGoalDialog
 @onready var grade_goal_line_edit: LineEdit = $GradeGoalDialog/VBoxContainer/GradeGoalLineEdit
 
-@onready var contact_mother_checkbox: CheckBox = $MarginContainer/VBoxContainer/ContactContainer/ContactMotherCheckBox
-@onready var contact_father_checkbox: CheckBox = $MarginContainer/VBoxContainer/ContactContainer/ContactFatherCheckBox
+@onready var contact_mother_checkbox: CheckBox = $MarginContainer/ScrollContainer/VBoxContainer/ContactContainer/ContactMotherCheckBox
+@onready var contact_father_checkbox: CheckBox = $MarginContainer/ScrollContainer/VBoxContainer/ContactContainer/ContactFatherCheckBox
 
-@onready var goal_text_edit: TextEdit = $MarginContainer/VBoxContainer/GoalContainer/GoalTextEdit
-@onready var goal_completed_button: Button = $MarginContainer/VBoxContainer/GoalContainer/VBoxContainer/GoalCompletedButton
-@onready var goal_not_completed_button: Button = $MarginContainer/VBoxContainer/GoalContainer/VBoxContainer/GoalNotCompletedButton
+@onready var goal_text_edit: TextEdit = $MarginContainer/ScrollContainer/VBoxContainer/GoalContainer/GoalTextEdit
+@onready var goal_completed_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/GoalContainer/VBoxContainer/GoalCompletedButton
+@onready var goal_not_completed_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/GoalContainer/VBoxContainer/GoalNotCompletedButton
 
-@onready var previous_student_button: Button = $MarginContainer/VBoxContainer/NextStudentButtonCointainer/PreviousStudentButton
-@onready var next_student_button: Button = $MarginContainer/VBoxContainer/NextStudentButtonCointainer/NextStudentButton
+@onready var previous_student_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/NextStudentButtonCointainer/PreviousStudentButton
+@onready var next_student_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/NextStudentButtonCointainer/NextStudentButton
 
 @onready var goal_comment_dialog: AcceptDialog = $GoalCommentDialog
 @onready var goal_comment_text_edit: TextEdit = $GoalCommentDialog/GoalCommentContainer/GoalCommentTextEdit
 
-@onready var mastery_text_edit: TextEdit = $MarginContainer/VBoxContainer/MasteryContainer/MasteryTextEdit
-@onready var mastery_yes_button: Button = $MarginContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer/MasteryYesButton
-@onready var mastery_no_button: Button = $MarginContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer/MasteryNoButton
+@onready var mastery_text_edit: TextEdit = $MarginContainer/ScrollContainer/VBoxContainer/MasteryContainer/MasteryTextEdit
+@onready var mastery_yes_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer/MasteryYesButton
+@onready var mastery_no_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/MasteryContainer/MasteryButtonContainer/MasteryNoButton
 
-@onready var interaction_text_edit: TextEdit = $MarginContainer/VBoxContainer/InteractionContainer/InteractionTextEdit
-@onready var positive_interaction_button: Button = $MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/PositiveInteractionButton
-@onready var negative_interaction_button: Button = $MarginContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/NegativeInteractionButton
+@onready var interaction_text_edit: TextEdit = $MarginContainer/ScrollContainer/VBoxContainer/InteractionContainer/InteractionTextEdit
+@onready var positive_interaction_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/PositiveInteractionButton
+@onready var negative_interaction_button: Button = $MarginContainer/ScrollContainer/VBoxContainer/InteractionContainer/InteractionButtonContainer/NegativeInteractionButton
 
 @onready var notes_button: Button = $MarginContainer/RightButtonsContainer/NotesButton
 @onready var notes_dialog: AcceptDialog = $NotesDialog
