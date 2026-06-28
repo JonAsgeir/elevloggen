@@ -1,32 +1,39 @@
 ﻿Fornavn;Etternavn;Fødselsdato;Fag
-Juan Oscár;Mardileño;1995-06-24;1P
-Rasmus;Mundviken;1989-01-18;1P
-Anne;Elise;1987-05-30;1P
-Nora;To;2003-04-28;1P
-Ess;Behn;1950-12-02;1P
-Kristin;Pepperglad;1988-05-05;1P
-Vanessa;Privatist;2005-03-18;1P
-Nora;Ein;2008-08-31;2PY
-Mester;Anders;1980-02-03;2PY
-V;Boss;1980-02-03;2PY
-Siri;Ringerhjem;1928-11-15;2PY
-Ro! Ro!;Arr;1951-07-18;2PY
-Utav;Det;1986-07-17;2PY
-Stine;Mardileño;1986-07-17;2PY
-Lise;London;1996-04-27;2PY
-Bea;The;1975-09-09;2PY
-Mikkel;Datamaskin;1984-05-07;2PY
-Hanne;Hi-Yah;1989-09-11;2PY
-Ge;The;1994-06-16;2PY
-Stian;Lagleder;1994-11-15;2PY
-Nils;Hønefar;1995-01-04;2PY
-Sandra;Berlin;1990-12-13;2PY
-Je;The;1993-10-14;2PY
-J;Dawg;1960-01-23;2PY
-Stine;Mardileño;1989-12-01;Spansk
-Juan Oscár;Mardileño;1995-06-24;Spansk
-Nora;Ein;2008-08-31;Spansk
-V;Boss;1980-02-03;Spansk
-Stian;Lagleder;1994-11-15;Spansk
-Rasmus;Mundviken;1989-01-18;Spansk
-Sandra;Berlin;1990-12-13;Spansk
+Juan Oscár;Madrileño;24.06.1995;1P
+Rasmus;Mundviken;18.01.1989;1P
+Anne;Elise;30.05.1987;1P
+Nora;To;28.04.2003;1P
+Ess;Behn;02.12.1950;1P
+Kristin;Pepperglad;05.05.1988;1P
+Vanessa;Privatist;18.03.2005;1P
+Nora;Ein;31.08.2008;2PY
+Mester;Anders;03.02.1980;2PY
+V;Boss;03.02.1980;2PY
+Siri;Ringerhjem;15.11.1928;2PY
+Ro! Ro!;Arr;18.07.1951;2PY
+Utav;Det;17.07.1986;2PY
+Stine;Madrileño;17.07.1986;2PY
+Lise;London;27.04.1996;2PY
+Bea;The;09.09.1975;2PY
+Mikkel;Datamaskin;07.05.1984;2PY
+Hanne;Hi-Yah;11.09.1989;2PY
+Ge;The;16.06.1994;2PY
+Stian;Lagleder;15.11.1994;2PY
+Nils;Hønefar;04.01.1995;2PY
+Sandra;Berlin;13.12.1990;2PY
+Je;The;14.10.1993;2PY
+J;Dawg;23.01.1960;2PY
+Stine;Madrileño;01.12.1989;Spansk
+Juan Oscár;Madrileño;24.06.1995;Spansk
+Nora;Ein;31.08.2008;Spansk
+V;Boss;03.02.1980;Spansk
+Stian;Lagleder;15.11.1994;Spansk
+Rasmus;Mundviken;18.01.1989;Spansk
+Sandra;Berlin;13.12.1990;Spansk
+Juan Oscár;Madrileño;24.06.1995;Mentor
+Nora;Ein;31.08.2008;Mentor
+V;Boss;03.02.1980;Mentor
+Siri;Ringerhjem;15.11.1928;Mentor
+Ro! Ro!;Arr;18.07.1951;Mentor
+Sandra;Berlin;13.12.1990;Mentor
+J;Dawg;23.01.1960;Mentor

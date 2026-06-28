@@ -1,7 +1,7 @@
 {
 	"subjects": [
 		{
-			"name": "Matematikk",
+			"name": "1P",
 			"goals": [
 				"Lese, hente ut og vurdere matematikk i tekster om situasjoner fra lokalmiljøet, gjøre beregninger knyttet til dette og presentere og argumentere for resultatene",
 				"Utforske hvordan ulike premisser vil kunne påvirke hvordan matematiske problemer fra samfunnsliv og arbeidsliv løses",
@@ -15,6 +15,21 @@
 				"Planlegge, utføre og presentere selvstendig arbeid knyttet til modellering og funksjoner innenfor samfunnsfaglige temaer",
 				"Bruke digitale verktøy i utforsking og problemløsing knyttet til egenskaper ved funksjoner, og diskutere løsningene",
 				"Tolke og regne med rotuttrykk, potenser og tall på standardform"
+			]
+		},
+		{
+			"name": "2PY",
+			"goals": [
+				"Utforske hvordan ulike premisser vil kunne påvirke hvordan matematiske problemer fra samfunnsliv og arbeidsliv løses",
+				"Analysere og presentere funn i datasett fra lokalsamfunn og media",
+				"Bruke og vurdere valg av formålstjenlige sentralmål og spredningsmål for statistisk datamateriale",
+				"Lese, hente ut og vurdere matematikk i tekster om samfunnsfaglige temaer og temaer fra lokalmiljøet, gjøre beregninger knyttet til dette og presentere og argumentere for resultatene",
+				"Utforske, beskrive og bruke begrepene proporsjonalitet og omvendt proporsjonalitet",
+				"Identifisere variable størrelser i ulike situasjoner og bruke dem til utforsking og generalisering",
+				"Forklare og bruke prosent, prosentpoeng og vekstfaktorer til modellering av praktiske situasjoner med digitale verktøy",
+				"Tolke og regne med rotuttrykk, potenser og tall på standardform",
+				"Planlegge, utføre og presentere selvstendig arbeid knyttet til modellering og funksjoner innenfor samfunnsfaglige temaer",
+				"Bruke digitale verktøy i utforsking og problemløsing knyttet til egenskaper ved funksjoner og diskutere løsningene"
 			]
 		},
 		{

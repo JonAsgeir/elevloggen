@@ -168,7 +168,7 @@ func add_subject(subject_name: String) -> void:
 	""" % subject_name)
 
 func get_subjects() -> Array:
-	db.query("SELECT * FROM subjects ORDER BY name;")
+	db.query("SELECT * FROM subjects;")
 	return db.query_result
 
 
@@ -188,7 +188,7 @@ func get_students_in_subject(subject_id: int) -> Array:
 	JOIN student_subjects
     	ON students.id = student_subjects.student_id
 	WHERE student_subjects.subject_id = %d
-	ORDER BY students.last_name, students.first_name;
+	ORDER BY students.first_name, students.last_name;
 	""" % subject_id)
 
 	return db.query_result
