@@ -5,7 +5,7 @@
 [node name="ComptetenceGoalItem" type="VBoxContainer" unique_id=1098878457]
 offset_right = 37.0
 offset_bottom = 35.0
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 script = ExtResource("1_g63ef")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1021806008]
@@ -13,9 +13,13 @@ layout_mode = 2
 
 [node name="AchievementOptionButton" type="OptionButton" parent="HBoxContainer" unique_id=853202781]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="DescriptionLabel" type="Label" parent="HBoxContainer" unique_id=1894300862]
+custom_minimum_size = Vector2(500, 20)
 layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
 
 [node name="ToggleCommentCheckButton" type="CheckButton" parent="HBoxContainer" unique_id=1985687521]
 layout_mode = 2
