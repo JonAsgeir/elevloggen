@@ -166,9 +166,9 @@ text = "Neste"
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="InfoButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=1315964575]
+[node name="MainMenuButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=1315964575]
 layout_mode = 2
-text = "Informasjon"
+text = "Hovedmeny"
 
 [node name="CompetenceButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=148429399]
 layout_mode = 2

@@ -35,6 +35,7 @@ extends Control
 @onready var notes_text_edit: TextEdit = $NotesDialog/VBoxContainer/NotesTextEdit
 
 @onready var competence_button: Button = $MarginContainer/RightButtonsContainer/CompetenceButton
+@onready var main_menu_button: Button = $MarginContainer/RightButtonsContainer/MainMenuButton
 
 var current_student_id: int = -1
 var pending_goal_result: String = ""
@@ -57,6 +58,7 @@ func _ready() -> void:
 	notes_button.pressed.connect(_on_notes_button_pressed)
 	notes_dialog.confirmed.connect(_on_notes_dialog_confirmed)
 	competence_button.pressed.connect(_on_competence_button_pressed)
+	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 	
 	show_current_student()
 
@@ -256,3 +258,8 @@ func _on_notes_dialog_confirmed() -> void:
 func _on_competence_button_pressed() -> void:
 	save_current_goal()
 	get_tree().change_scene_to_file("res://scenes/competence_page.tscn")
+	
+func _on_main_menu_button_pressed() -> void:
+	save_current_goal()
+	AppState.reset()
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
