@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dvklenod13c8d"]
+
+[ext_resource type="Script" uid="uid://dyw2piibtook3" path="res://scripts/statistics_section.gd" id="1_mk61f"]
+
+[node name="StatisticsSection" type="VBoxContainer" unique_id=1595520845]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_mk61f")
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=1135506052]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="Content" type="RichTextLabel" parent="." unique_id=1773160096]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

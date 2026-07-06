@@ -369,21 +369,371 @@ func get_students_with_fewest_positive_interactions(subject_id: int, days: int =
 
 	return db.query_result
 
-func get_student_notes(student_id: int) -> String:
+func get_students_with_most_positive_interactions(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND interactions.date >= date('now', '-%d days')" % days
+
 	db.query("""
-	SELECT notes
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		COUNT(interactions.id) AS positive_count
 	FROM students
-	WHERE id = %d;
-	""" % student_id)
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN interactions
+		ON students.id = interactions.student_id
+		AND interactions.subject_id = %d
+		AND interactions.type = 'positive'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY positive_count DESC, students.last_name ASC, students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
 
-	if db.query_result.size() > 0:
-		var notes = db.query_result[0]["notes"]
-		if notes == null:
-			return ""
-		return notes
+	return db.query_result
 
-	return ""
+func get_students_with_oldest_positive_interaction(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
 
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND interactions.date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		MAX(interactions.date) AS last_positive_date,
+		CAST(
+			julianday('now') - julianday(MAX(interactions.date))
+			AS INTEGER
+		) AS days_since_positive
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN interactions
+		ON students.id = interactions.student_id
+		AND interactions.subject_id = %d
+		AND interactions.type = 'positive'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY last_positive_date IS NOT NULL ASC,
+	         days_since_positive DESC,
+	         students.last_name ASC,
+	         students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+
+func get_students_with_newest_positive_interaction(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND interactions.date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		MAX(interactions.date) AS last_positive_date,
+		CAST(
+			julianday('now') - julianday(MAX(interactions.date))
+			AS INTEGER
+		) AS days_since_positive
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN interactions
+		ON students.id = interactions.student_id
+		AND interactions.subject_id = %d
+		AND interactions.type = 'positive'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY last_positive_date DESC,
+	         students.last_name ASC,
+	         students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+
+func get_students_with_least_mastery(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND mastery_observations.date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		COUNT(mastery_observations.id) AS mastery_count
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN mastery_observations
+		ON students.id = mastery_observations.student_id
+		AND mastery_observations.subject_id = %d
+		AND mastery_observations.status = 'mastery'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY mastery_count ASC, students.last_name ASC, students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+	
+func get_students_with_most_mastery(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND mastery_observations.date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		COUNT(mastery_observations.id) AS mastery_count
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN mastery_observations
+		ON students.id = mastery_observations.student_id
+		AND mastery_observations.subject_id = %d
+		AND mastery_observations.status = 'mastery'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY mastery_count DESC, students.last_name ASC, students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+	
+func get_students_with_oldest_mastery(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND mastery_observations.date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		MAX(mastery_observations.date) AS last_mastery_date,
+		CAST(
+			julianday('now') - julianday(MAX(mastery_observations.date))
+			AS INTEGER
+		) AS days_since_mastery
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN mastery_observations
+		ON students.id = mastery_observations.student_id
+		AND mastery_observations.subject_id = %d
+		AND mastery_observations.status = 'mastery'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY last_mastery_date IS NOT NULL ASC,
+	         days_since_mastery DESC,
+	         students.last_name ASC,
+	         students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+	
+func get_students_with_newest_mastery(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND mastery_observations.date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		MAX(mastery_observations.date) AS last_mastery_date,
+		CAST(
+			julianday('now') - julianday(MAX(mastery_observations.date))
+			AS INTEGER
+		) AS days_since_mastery
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN mastery_observations
+		ON students.id = mastery_observations.student_id
+		AND mastery_observations.subject_id = %d
+		AND mastery_observations.status = 'mastery'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY last_mastery_date DESC,
+	         students.last_name ASC,
+	         students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+	
+func get_students_with_fewest_completed_goals(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND goals.completed_date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		COUNT(goals.id) AS completed_goal_count
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN goals
+		ON students.id = goals.student_id
+		AND goals.subject_id = %d
+		AND goals.completion_result = 'completed'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY completed_goal_count ASC, students.last_name ASC, students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+	
+func get_students_with_most_completed_goals(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND goals.completed_date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		COUNT(goals.id) AS completed_goal_count
+	FROM students
+	JOIN student_subjects
+		ON students.id = student_subjects.student_id
+	LEFT JOIN goals
+		ON students.id = goals.student_id
+		AND goals.subject_id = %d
+		AND goals.completion_result = 'completed'
+		%s
+	WHERE student_subjects.subject_id = %d
+	GROUP BY students.id
+	ORDER BY completed_goal_count DESC, students.last_name ASC, students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, subject_id, limit_sql])
+
+	return db.query_result
+
+func get_students_with_oldest_active_goals(subject_id: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		goals.goal_text,
+		CAST(
+			julianday('now') - julianday(goals.created_date)
+			AS INTEGER
+		) AS days_since_goal_created
+	FROM goals
+	JOIN students
+		ON goals.student_id = students.id
+	WHERE goals.subject_id = %d
+	AND goals.completed_date IS NULL
+	ORDER BY days_since_goal_created DESC,
+	         students.last_name ASC,
+	         students.first_name ASC
+	%s;
+	""" % [subject_id, limit_sql])
+
+	return db.query_result
+	
+func get_students_with_newest_completed_goals(subject_id: int, days: int, limit_count: int) -> Array:
+	var limit_sql := ""
+	if limit_count != -1:
+		limit_sql = "LIMIT %d" % limit_count
+
+	var date_filter := ""
+	if days != -1:
+		date_filter = "AND goals.completed_date >= date('now', '-%d days')" % days
+
+	db.query("""
+	SELECT
+		students.id,
+		students.first_name,
+		students.last_name,
+		goals.goal_text,
+		CAST(
+			julianday('now') - julianday(goals.completed_date)
+			AS INTEGER
+		) AS days_since_goal_completed
+	FROM goals
+	JOIN students
+		ON goals.student_id = students.id
+	WHERE goals.subject_id = %d
+	AND goals.completion_result = 'completed'
+	%s
+	ORDER BY goals.completed_date DESC,
+	         students.last_name ASC,
+	         students.first_name ASC
+	%s;
+	""" % [subject_id, date_filter, limit_sql])
+
+	return db.query_result
 
 func update_student_notes(student_id: int, notes: String) -> void:
 	db.query("""

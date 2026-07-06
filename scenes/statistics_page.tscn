@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bqh1wpc1b3g6s"]
 
 [ext_resource type="Script" uid="uid://irm1vv2rxcyo" path="res://scripts/statistics_page.gd" id="1_7uxdg"]
+[ext_resource type="PackedScene" uid="uid://dvklenod13c8d" path="res://scenes/statistics_section.tscn" id="2_hk3m0"]
 
 [node name="StatisticsPage" type="Control" unique_id=1861017685]
 layout_mode = 3
@@ -26,22 +27,62 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1330220927]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1083846870]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=1882476793]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=259876988]
+[node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=259876988]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistikk"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="LowInteractionLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1642818399]
+[node name="OptionButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=725385799]
+layout_mode = 2
+
+[node name="OptionButtonsDescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer/OptionButtonsContainer" unique_id=274331567]
+layout_mode = 2
+text = "Vis statistikk for"
+
+[node name="PeriondOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/OptionButtonsContainer" unique_id=202681193]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "14 dager"
+popup/item_0/id = 0
+popup/item_1/text = "30 dager"
+popup/item_1/id = 1
+popup/item_2/text = "60 dager"
+popup/item_2/id = 2
+popup/item_3/text = "hele skoleåret"
+popup/item_3/id = 3
+
+[node name="LimitOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/OptionButtonsContainer" unique_id=1104739833]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "1 elev"
+popup/item_0/id = 0
+popup/item_1/text = "3 elever"
+popup/item_1/id = 1
+popup/item_2/text = "5 elever"
+popup/item_2/id = 2
+popup/item_3/text = "hele klassen"
+popup/item_3/id = 3
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1606890078]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1083846870]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatisticsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=18026131]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FollowUpSection" parent="MarginContainer/VBoxContainer/ScrollContainer/StatisticsContainer" unique_id=1595520845 instance=ExtResource("2_hk3m0")]
+layout_mode = 2
+
+[node name="PositiveSection" parent="MarginContainer/VBoxContainer/ScrollContainer/StatisticsContainer" unique_id=3808112 instance=ExtResource("2_hk3m0")]
 layout_mode = 2
 
 [node name="NavigationButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1965524027]
