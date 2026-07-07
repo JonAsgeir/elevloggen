@@ -50,11 +50,17 @@ func _on_close_button_pressed() -> void:
 func save_all_assessments() -> void:
 	for child in competence_goals_container.get_children():
 		if child is CompetenceGoalItem:
+			var achievement_level: String = child.get_achievement_level()
+			var comment: String = child.get_comment()
+
+			if achievement_level == "not_assessed" and comment == "":
+				continue
+
 			Database.save_competence_assessment(
 				current_student_id,
 				AppState.selected_subject_id,
 				child.competence_goal_id,
-				child.get_achievement_level(),
-				child.get_comment(),
+				achievement_level,
+				comment,
 				Time.get_date_string_from_system()
 			)

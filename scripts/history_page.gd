@@ -20,4 +20,57 @@ func _on_close_button_pressed() -> void:
 
 
 func show_history() -> void:
-	history_label.text = "Historikk kommer her..."
+	var student_summary = AppState.current_students[AppState.current_student_index]
+	var student_id = student_summary["id"]
+
+	var filter := get_selected_filter()
+	var events = Database.get_student_history(student_id, filter)
+
+	var text := ""
+
+	for event in events:
+		text += "%s (%s) %s\n" % [
+			format_history_date(event["event_date"]),
+			format_event_type(event["event_type"]),
+			event["event_text"]
+		]
+
+	history_label.text = text
+	
+func get_selected_filter() -> String:
+	match filter_option_button.selected:
+		1:
+			return "goals"
+		2:
+			return "mastery"
+		3:
+			return "interactions"
+		4:
+			return "competence"
+		_:
+			return "all"
+
+
+func format_event_type(event_type: String) -> String:
+	match event_type:
+		"goal":
+			return "Mål"
+		"interaction":
+			return "Interaksjon"
+		"mastery":
+			return "Mestring"
+		"competence":
+			return "Kompetansemål"
+		_:
+			return event_type
+
+
+func format_history_date(date: String) -> String:
+	if date == "":
+		return ""
+
+	var parts := date.split("-")
+	if parts.size() != 3:
+		return date
+
+	return "%d." % int(parts[2])

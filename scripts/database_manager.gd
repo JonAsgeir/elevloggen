@@ -852,3 +852,85 @@ func import_competence_goals_from_json(path: String) -> void:
 			add_competence_goal(subject_id, goal_description)
 
 	print("Importerte kompetansemål fra: ", path)
+	
+func get_student_history(student_id: int, filter: String = "all") -> Array:
+	var filter_sql := ""
+
+	match filter:
+		"goals":
+			filter_sql = "WHERE event_type = 'goal'"
+		"interactions":
+			filter_sql = "WHERE event_type = 'interaction'"
+		"mastery":
+			filter_sql = "WHERE event_type = 'mastery'"
+		"competence":
+			filter_sql = "WHERE event_type = 'competence'"
+		_:
+			filter_sql = ""
+
+	db.query("""
+	SELECT *
+	FROM (
+		SELECT
+			created_date AS event_date,
+			'goal' AS event_type,
+			'Nytt mål: ' || goal_text AS event_text
+		FROM goals
+		WHERE student_id = %d
+
+		UNION ALL
+
+		SELECT
+			completed_date AS event_date,
+			'goal' AS event_type,
+			'Mål fullført: ' || goal_text AS event_text
+		FROM goals
+		WHERE student_id = %d
+		AND completed_date IS NOT NULL
+
+		UNION ALL
+
+		SELECT
+			date AS event_date,
+			'interaction' AS event_type,
+			comment AS event_text
+		FROM interactions
+		WHERE student_id = %d
+
+		UNION ALL
+
+		SELECT
+			date AS event_date,
+			'mastery' AS event_type,
+			comment AS event_text
+		FROM mastery_observations
+		WHERE student_id = %d
+
+		UNION ALL
+
+		SELECT
+			updated_date AS event_date,
+			'competence' AS event_type,
+			'Kompetansemål: ' || competence_goals.description || ' → ' ||
+			CASE student_competence_assessments.achievement_level
+				WHEN 'low' THEN 'Lav'
+				WHEN 'medium' THEN 'Middels'
+				WHEN 'high' THEN 'Høy'
+				WHEN 'not_assessed' THEN 'Ikke vurdert'
+				ELSE student_competence_assessments.achievement_level
+			END AS event_text
+		FROM student_competence_assessments
+		JOIN competence_goals
+			ON student_competence_assessments.competence_goal_id = competence_goals.id
+		WHERE student_competence_assessments.student_id = %d
+		AND student_competence_assessments.updated_date IS NOT NULL
+		AND (
+			student_competence_assessments.achievement_level != 'not_assessed'
+			OR student_competence_assessments.comment != ''
+		)
+	) AS history_events
+	%s
+	ORDER BY event_date DESC;
+	""" % [student_id, student_id, student_id, student_id, student_id, filter_sql])
+
+	return db.query_result
