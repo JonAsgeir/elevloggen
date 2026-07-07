@@ -178,6 +178,10 @@ text = "Hovedmeny"
 layout_mode = 2
 size_flags_horizontal = 8
 
+[node name="HistoryButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=234754916]
+layout_mode = 2
+text = "Historie"
+
 [node name="CompetenceButton" type="Button" parent="MarginContainer/RightButtonsContainer" unique_id=148429399]
 layout_mode = 2
 text = "Kompetansemål"
