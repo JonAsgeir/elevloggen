@@ -23,7 +23,7 @@ func create_tables() -> void:
     birthdate TEXT,
     contact_mother INTEGER DEFAULT 0,
     contact_father INTEGER DEFAULT 0,
-	notes TEXT,
+	notes TEXT DEFAULT '',
     UNIQUE(first_name, last_name, birthdate)
 	);
 	""")
