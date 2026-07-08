@@ -170,6 +170,10 @@ text = "Neste"
 layout_mode = 2
 size_flags_horizontal = 4
 
+[node name="StatisticsButton" type="Button" parent="MarginContainer/VBoxContainer/NagivationButtonsContainer" unique_id=2058164061]
+layout_mode = 2
+text = "Statistikk"
+
 [node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer/NagivationButtonsContainer" unique_id=1315964575]
 layout_mode = 2
 text = "Hovedmeny"

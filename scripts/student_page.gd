@@ -35,6 +35,7 @@ extends Control
 @onready var notes_text_edit: TextEdit = $NotesDialog/VBoxContainer/NotesTextEdit
 
 @onready var competence_button: Button = $MarginContainer/RightButtonsContainer/CompetenceButton
+@onready var statistics_button: Button = $MarginContainer/VBoxContainer/NagivationButtonsContainer/StatisticsButton
 @onready var main_menu_button: Button = $MarginContainer/VBoxContainer/NagivationButtonsContainer/MainMenuButton
 @onready var history_button: Button = $MarginContainer/RightButtonsContainer/HistoryButton
 
@@ -61,6 +62,7 @@ func _ready() -> void:
 	competence_button.pressed.connect(_on_competence_button_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 	history_button.pressed.connect(_on_history_button_pressed)
+	statistics_button.pressed.connect(_on_statistics_button_pressed)
 	
 	show_current_student()
 
@@ -269,3 +271,7 @@ func _on_main_menu_button_pressed() -> void:
 func _on_history_button_pressed() -> void:
 	save_current_goal()
 	get_tree().change_scene_to_file("res://scenes/history_page.tscn")
+
+func _on_statistics_button_pressed() -> void:
+	save_current_goal()
+	get_tree().change_scene_to_file("res://scenes/statistics_page.tscn")
