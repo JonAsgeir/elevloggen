@@ -245,7 +245,7 @@ func _on_negative_interaction_button_pressed() -> void:
 func _on_notes_button_pressed() -> void:
 	if current_student_id == -1:
 		return
-
+	
 	notes_text_edit.text = Database.get_student_notes(current_student_id)
 	notes_dialog.popup_centered()
 

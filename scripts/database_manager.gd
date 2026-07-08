@@ -933,3 +933,18 @@ func get_student_history(student_id: int, subject_id: int, filter: String = "all
 	])
 
 	return db.query_result
+
+func get_student_notes(student_id: int) -> String:
+	db.query("""
+	SELECT notes
+	FROM students
+	WHERE students.id = %s
+	LIMIT 1
+	""" % [student_id])
+	
+	var note = db.query_result[0]["notes"]
+	if note != null:
+		return note
+	else:
+		return ""
+		
