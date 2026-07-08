@@ -24,13 +24,24 @@ func show_history() -> void:
 	var student_id = student_summary["id"]
 
 	var filter := get_selected_filter()
-	var events = Database.get_student_history(student_id, filter)
+	var events = Database.get_student_history(
+		student_id,
+		AppState.selected_subject_id,
+		filter
+	)
 
 	var text := ""
+	var current_month := ""
 
 	for event in events:
+		var month_heading := format_history_month(event["event_date"])
+
+		if month_heading != current_month:
+			current_month = month_heading
+			text += "\n%s\n\n" % current_month
+
 		text += "%s (%s) %s\n" % [
-			format_history_date(event["event_date"]),
+			format_history_day(event["event_date"]),
 			format_event_type(event["event_type"]),
 			event["event_text"]
 		]
@@ -74,3 +85,36 @@ func format_history_date(date: String) -> String:
 		return date
 
 	return "%d." % int(parts[2])
+	
+func format_history_day(date: String) -> String:
+	var parts := date.split("-")
+	if parts.size() != 3:
+		return date
+
+	return "%d." % int(parts[2])
+	
+func format_history_month(date: String) -> String:
+	var parts := date.split("-")
+	if parts.size() != 3:
+		return "Ukjent dato"
+
+	var month := int(parts[1])
+	var year := int(parts[0])
+
+	var month_names := [
+		"",
+		"JANUAR",
+		"FEBRUAR",
+		"MARS",
+		"APRIL",
+		"MAI",
+		"JUNI",
+		"JULI",
+		"AUGUST",
+		"SEPTEMBER",
+		"OKTOBER",
+		"NOVEMBER",
+		"DESEMBER"
+	]
+
+	return "%s %d" % [month_names[month], year]
