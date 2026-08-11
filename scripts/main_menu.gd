@@ -1,9 +1,11 @@
 extends Control
 
-@onready var vbox: VBoxContainer = $CenterContainer/VBoxContainer/SubjectButtons
+@onready var vbox: VBoxContainer = $MarginContainer/CenterContainer/VBoxContainer/SubjectButtons
+@onready var settings_button: Button = $MarginContainer/SettingsButton
 
 func _ready() -> void:
 	load_subject_buttons()
+	settings_button.pressed.connect(_on_settings_button_pressed)
 
 func load_subject_buttons() -> void:
 	var subjects = Database.get_subjects()
@@ -24,5 +26,8 @@ func _on_subject_pressed(subject_id: int, subject_name: String) -> void:
 	print("Antall elever: ", AppState.current_students.size())
 
 	get_tree().change_scene_to_file("res://scenes/student_page.tscn")
+	
+func _on_settings_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/settings_page.tscn")
 	
 	

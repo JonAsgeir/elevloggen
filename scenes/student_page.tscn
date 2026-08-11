@@ -166,6 +166,10 @@ text = "Forrige"
 layout_mode = 2
 text = "Neste"
 
+[node name="JumpToButton" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/NextStudentButtonCointainer" unique_id=767931344]
+layout_mode = 2
+text = "Hopp til"
+
 [node name="NagivationButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1608321697]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -238,5 +242,20 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="NotesTextEdit" type="TextEdit" parent="NotesDialog/VBoxContainer" unique_id=1032881251]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JumpToDialog" type="ConfirmationDialog" parent="." unique_id=789175287]
+title = "Hopp til elev"
+ok_button_text = "Velg"
+cancel_button_text = "Tilbake"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JumpToDialog" unique_id=407237575]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StudentList" type="ItemList" parent="JumpToDialog/VBoxContainer" unique_id=968934288]
 layout_mode = 2
 size_flags_vertical = 3

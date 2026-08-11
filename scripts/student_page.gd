@@ -18,6 +18,9 @@ extends Control
 
 @onready var previous_student_button: Button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/NextStudentButtonCointainer/PreviousStudentButton
 @onready var next_student_button: Button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/NextStudentButtonCointainer/NextStudentButton
+@onready var jump_to_button: Button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/NextStudentButtonCointainer/JumpToButton
+@onready var jump_to_dialog: ConfirmationDialog = $JumpToDialog
+@onready var student_list: ItemList = $JumpToDialog/VBoxContainer/StudentList
 
 @onready var goal_comment_dialog: AcceptDialog = $GoalCommentDialog
 @onready var goal_comment_text_edit: TextEdit = $GoalCommentDialog/GoalCommentContainer/GoalCommentTextEdit
@@ -63,6 +66,9 @@ func _ready() -> void:
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 	history_button.pressed.connect(_on_history_button_pressed)
 	statistics_button.pressed.connect(_on_statistics_button_pressed)
+	jump_to_button.pressed.connect(_on_jump_to_button_pressed)
+	jump_to_dialog.confirmed.connect(_on_jump_to_dialog_confirmed)
+	student_list.item_activated.connect(_on_student_list_item_activated)
 	
 	show_current_student()
 
@@ -275,3 +281,45 @@ func _on_history_button_pressed() -> void:
 func _on_statistics_button_pressed() -> void:
 	save_current_goal()
 	get_tree().change_scene_to_file("res://scenes/statistics_page.tscn")
+
+func _on_jump_to_button_pressed() -> void:
+	student_list.clear()
+
+	for student in AppState.current_students:
+		var full_name := "%s %s" % [
+			student["first_name"],
+			student["last_name"]
+		]
+
+		student_list.add_item(full_name)
+
+	# Marker eleven som allerede vises.
+	var current_index := AppState.current_student_index
+
+	if current_index >= 0 and current_index < student_list.item_count:
+		student_list.select(current_index)
+		student_list.ensure_current_is_visible()
+
+	jump_to_dialog.popup_centered(Vector2i(450, 550))
+
+func _on_jump_to_dialog_confirmed() -> void:
+	var selected_items := student_list.get_selected_items()
+
+	if selected_items.is_empty():
+		return
+
+	jump_to_student(selected_items[0])
+	
+func jump_to_student(student_index: int) -> void:
+	if student_index < 0 or student_index >= AppState.current_students.size():
+		return
+
+	save_current_goal()
+
+	AppState.current_student_index = student_index
+	show_current_student()
+
+	jump_to_dialog.hide()
+	
+func _on_student_list_item_activated(index: int) -> void:
+	jump_to_student(index)

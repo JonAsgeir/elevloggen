@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 AppState="*uid://o6c07wxk38tu"
 Database="*uid://dw4cut3a5i0sw"
+Settings="*uid://g4a7n3uam4x"
 
 [display]
 
