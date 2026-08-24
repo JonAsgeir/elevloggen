@@ -7,4 +7,7 @@
 
 # Databaser
 *.db
+
+# Annen elevdata
 *.csv
+*.import
