@@ -18,6 +18,18 @@
 			]
 		},
 		{
+			"name": "2P",
+			"goals": [
+				"Forklare og bruke prosent, prosentpoeng og vekstfaktor til modellering av praktiske situasjoner med digitale verktøy",
+				"Utforske og forklare sammenhenger mellom prisindeks, kroneverdi, reallønn, nominell lønn og brutto- og nettoinntekt",
+				"Utforske strategier for å løse ligninger, ligningssystemer og ulikheter og argumentere for tenkemåtene sine",
+				"Vurdere valg knyttet til personlig økonomi og reflektere over konsekvenser av å ta opp lån og å bruke kredittkort",
+				"Analysere og presentere funn i datasett fra lokalsamfunn og media",
+				"Bruke og vurdere valg av hensiktsmessige sentralmål og spredningsmål for statistisk datamateriale",
+				"Utforske og forklare hvordan formlikhet, målestokk og egenskaper ved geometriske figurer kan brukes i beregninger og i praktisk arbeid"
+			]
+		},
+		{
 			"name": "2PY",
 			"goals": [
 				"Utforske hvordan ulike premisser vil kunne påvirke hvordan matematiske problemer fra samfunnsliv og arbeidsliv løses",
