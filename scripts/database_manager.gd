@@ -189,6 +189,7 @@ func get_students_in_subject(subject_id: int) -> Array:
 	JOIN student_subjects
     	ON students.id = student_subjects.student_id
 	WHERE student_subjects.subject_id = %d
+		AND students.active = 1
 	ORDER BY students.first_name, students.last_name;
 	""" % subject_id)
 
