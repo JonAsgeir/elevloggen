@@ -2,11 +2,11 @@
 
 importer="csv_translation"
 type="Translation"
-uid="uid://dhwgju58ad8u3"
+uid="uid://tcdyk1r0u8m5"
 
 [deps]
 
-source_file="res://import/testdata.csv"
+source_file="res://import/elevdata.csv"
 
 [params]
 

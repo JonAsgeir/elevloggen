@@ -11,7 +11,7 @@ func _ready() -> void:
 	print(ProjectSettings.globalize_path("user://"))
 	
 	import_competence_goals_from_json("res://import/competence_goals.json")
-	import_students_from_csv("res://import/testdata.csv")
+	import_students_from_csv("res://import/elevdata.csv")
 
 	
 func create_tables() -> void:
@@ -168,7 +168,8 @@ func add_subject(subject_name: String) -> void:
 	""" % subject_name)
 
 func get_subjects() -> Array:
-	db.query("SELECT * FROM subjects;")
+	db.query("SELECT * FROM subjects
+		ORDER BY name COLLATE NOCASE ASC;")
 	return db.query_result
 
 
